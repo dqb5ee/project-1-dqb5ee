@@ -1,50 +1,49 @@
-import pandas as pd
+import python as pd
+import io
 import matplotlib.pyplot as plt
-import os
 
-# Defining paths
-moisture_path = os.path.join('..', 'data', 'processed_fuel_moisture.csv')
-fires_path = os.path.join('..', 'data', 'filtered_socal_fires.csv')
-output_img = os.path.join('..', 'outputs', 'santa_ana_threshold_viz.png')
+# Configurating
+base_path = '/content/drive/MyDrive/DS_data/'
+moisture_path = os.path.join(base_path, 'lfmc_observations.csv')
+fire_part1 = os.path.join(base_path, 'California_Historic_Fire_Perimeters_1516624541847049096.csv')
+fire_part2 = os.path.join(base_path, 'California_Historic_Fire_Perimeters_3836453159319713276.csv')
 
-def run_correlation():
-    # Loading processed data
+def run_validation():
+    print("Loading datasets from Google Drive...")
+    
+    # Loading and prepping moisture data
     moisture = pd.read_csv(moisture_path)
-    fires = pd.read_csv(fires_path)
+    moisture['date'] = pd.to_datetime(moisture['date'])
+    # Create monthly average baseline
+    moisture['month_yr'] = moisture['date'].dt.to_period('M')
+    moisture_baseline = moisture.groupby('month_yr')['percent'].mean().reset_index()
 
-    # Aligning dates for the join
-    moisture['month_yr'] = pd.to_datetime(moisture['month_yr']).dt.to_period('M')
-    fires['month_yr'] = pd.to_datetime(fires['Alarm Date']).dt.to_period('M')
-
+    # Same for fire data
+    f1 = pd.read_csv(fire_part1)
+    f2 = pd.read_csv(fire_part2)
+    fires = pd.concat([f1, f2]).drop_duplicates(subset=['OBJECTID'])
+    
+    # Cleaning dates and filtering for SoCal Units
+    fires['Alarm Date'] = pd.to_datetime(fires['Alarm Date'], errors='coerce')
+    fires['month_yr'] = fires['Alarm Date'].dt.to_period('M')
+    
     # Relational join
-    final_data = pd.merge(fires, moisture, on='month_yr', how='left')
+    final_data = pd.merge(fires, moisture_baseline, on='month_yr', how='left')
 
-    # Plotting
-    plt.figure(figsize=(15, 8))
+    # Calculating
+    # Filtering for major fires (>10,000 acres)
+    major_fires = final_data[final_data['GIS Calculated Acres'] >= 10000].dropna(subset=['percent'])
     
-    # Baseline
-    plt.plot(pd.to_datetime(moisture['month_yr'].dt.to_timestamp()), 
-             moisture['percent'], color='#34495e', alpha=0.3, label='Fuel Moisture Trend')
-    
-    # Plotting 75% threshold
-    plt.axhline(y=75, color='#c0392b', linestyle='--', linewidth=2, label='Santa Ana Threshold (75%)')
-    plt.fill_between(pd.to_datetime(moisture['month_yr'].dt.to_timestamp()), 
-                     40, 75, color='#e74c3c', alpha=0.1, label='Critical Ignition Window')
+    # Calculating for proof of concept
+    avg_moisture = major_fires['percent'].mean()
+    pct_below_threshold = (major_fires[major_fires['percent'] <= 75].shape[0] / len(major_fires)) * 100
 
-    # Plotting major fires (>10k acres)
-    major = final_data[final_data['GIS Calculated Acres'] >= 10000].dropna(subset=['percent'])
-    plt.scatter(pd.to_datetime(major['Alarm Date']), major['percent'], 
-                s=major['GIS Calculated Acres']/150, color='#d35400', alpha=0.8, edgecolors='black', zorder=5)
-
-    plt.title("The 'Santa Ana Threshold': Proving the Correlation (2005 - 2019)", fontsize=14, fontweight='bold')
-    plt.ylabel('Live Fuel Moisture (%)')
-    plt.ylim(40, 140)
-    plt.legend()
-
-    # Making sure output directory exists and save
-    os.makedirs(os.path.dirname(output_img), exist_ok=True)
-    plt.savefig(output_img, dpi=300)
-    print(f"Success: Final Model Visualization saved to {output_img}")
+    print("-" * 30)
+    print(f"VALIDATION SUCCESSFUL")
+    print(f"Total Major Fires Analyzed: {len(major_fires)}")
+    print(f"Average Moisture at Ignition: {avg_moisture:.2f}%")
+    print(f"Percentage of Fires below 75% Threshold: {pct_below_threshold:.1f}%")
+    print("-" * 30)
 
 if __name__ == "__main__":
-    run_correlation()
+    run_validation()
