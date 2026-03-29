@@ -91,8 +91,8 @@ To make sure the "Santa Ana Threshold" is a reliable predictor, the analysis use
 The model is built on prioritizing public safety over spatial precision in some instances. A major judgment call was setting the 75% moisture threshold, which is a more conservative "early warning" limit that marks conditions high risk before they reach the normal 60% critical state. While this increases the potential for false positives, it also makes sure that the model identifies the onset of the ignition window rather than just the height of a disaster. Similarly, the decision to use a regional monthly baseline (aggregating data from 28 distinct sites) mitigates the high uncertainty that comes with localized sensors and roadside climate anomalies. This assumes that fire risk is a landscape level phenomenon requiring a regional signal for effective decision making. Finally, the use of a 10,000-acre filter intentionally isolates suppression resistant fire behavior, removing the noise of varying fire department response times to focus only on the biological conditions that allow for uncontrollable spread.
 
 ## Metadata
+<img width="3994" height="889" alt="Blank diagram - Page 1 Wildfire Threshold Analysis ERD" src="https://github.com/user-attachments/assets/c5284c86-7d13-4ff2-9b85-d21805e2082e" />
 
-<img width="3109" height="819" alt="wildfire_erd 4 58 32 PM" src="https://github.com/user-attachments/assets/d285cb14-c3d1-411f-a6c4-20a138d71461" />
 
 The relationship between `Moisture_Reading` and `Wildfire_Event` is a temporal join based on the Date and Alarm_Date fields. Because environmental data lacks a shared unique ID with event data, the model correlates these entities by matching the fire's ignition timing to the corresponding monthly fuel moisture baseline.
 
