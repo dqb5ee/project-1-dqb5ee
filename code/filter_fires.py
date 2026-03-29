@@ -12,8 +12,8 @@ def run():
     
     # Defining the specific filenames as they appear in /data folder
     chunks = [
-        os.path.join(data_dir, 'California_Historic_Fire_Perimeters_1.csv'),
-        os.path.join(data_dir, 'California_Historic_Fire_Perimeters_2.csv')
+        os.path.join(data_dir, 'California_Historic_Fire_Perimeters_1516624541847049096.csv'),
+        os.path.join(data_dir, 'California_Historic_Fire_Perimeters_3836453159319713276.csv')
     ]
     
     # Verification Step
@@ -27,6 +27,12 @@ def run():
     # Merging & de-duplicating
     # Concatenates both chunks and removes records with identical OBJECTIDs
     df = pd.concat([pd.read_csv(f) for f in chunks], ignore_index=True)
+    
+    # Standardizing the Date at the SOURCE
+    # Removes need for complex SQL parsing later
+    df['Alarm Date'] = pd.to_datetime(df['Alarm Date'], errors='coerce')
+    df = df.dropna(subset=['Alarm Date']) # Remove any records with unparseable dates
+    
     df = df.drop_duplicates(subset=['OBJECTID'])
     
     # Applying research threshold
@@ -54,7 +60,4 @@ def run():
     print(f"Success: Created {output_path} with {len(events)} records.")
 
 if __name__ == "__main__":
-    run()    print(f"Success: {output_path} created with {len(fires_clean)} relevant fire events.")
-
-if __name__ == "__main__":
-    filter_fire_data()
+    run()
