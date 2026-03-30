@@ -7,7 +7,7 @@
 
 **NetID:** dqb5ee
 
-**DOI:** [![DOI](https://zenodo.org/badge/1188880173.svg)](https://doi.org/10.5281/zenodo.19324715)
+**DOI:** [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.19340739.svg)](https://doi.org/10.5281/zenodo.19340739)
 
 **Press Release:** [View the "Arid Edge" Announcement](https://github.com/dqb5ee/project-1-dqb5ee/blob/main/pressrelease.md)
 
