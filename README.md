@@ -13,7 +13,7 @@
 
 **Data:** [OneDrive Folder: Southern California Wildfire & Moisture Data](https://myuva-my.sharepoint.com/:f:/g/personal/dqb5ee_virginia_edu/IgBl82ldBtixSpBs556Z1Z_gARDRne96Iha1X__LFe-_Zz4?e=RagYNQ)
 
-**Pipeline:** [Technical Pipeline & Execution Log](https://github.com/dqb5ee/project-1-dqb5ee/blob/main/Pipeline.md)
+**Pipeline:** [Technical Pipeline & Execution Log](https://github.com/dqb5ee/project-1-dqb5ee/tree/main/pipeline)
 
 **License:** This project is licensed under the [MIT License.](https://github.com/dqb5ee/project-1-dqb5ee/blob/main/License.md)
 
