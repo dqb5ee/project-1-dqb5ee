@@ -8,8 +8,8 @@ def run():
     It serves as the final bridge between environmental baselines and historical fire events to create a unified analytical dataset.
     """
     
-    # Defining the data directory relative to the code folder
-    data_dir = os.path.join('..', 'data')
+    # Defining the data directory for Google Colab
+    data_dir = '/content/drive/MyDrive/DS_data/'
     
     # Initializing an in memory DuckDB connection
     con = duckdb.connect()
@@ -35,6 +35,15 @@ def run():
         ORDER BY f.GIS_Acres DESC
     """
     
+    # Executing and returning as a dataframe for the Random Forest step
+    df_analysis = con.execute(query).df()
+    
+    print(f"Relational Join Complete. Analytical Dataset contains {len(df_analysis)} matched records.")
+    return df_analysis
+
+# Executing the join within the Colab environment
+df_analysis = run()
+df_analysis.head()    
     # Executing the relational query and convert the result set into a pandas df
     results = con.execute(query).df()
     
@@ -43,7 +52,7 @@ def run():
     output_path = os.path.join(data_dir, 'final_arid_edge_analysis.parquet')
     results.to_parquet(output_path, index=False)
     
-    print(f"✅ Success: Final analytical join complete and saved to {output_path}")
+    print("Entity created successfully.")
 
 if __name__ == "__main__":
     run()
