@@ -1,5 +1,5 @@
 # DS 4320 Project 1: Finding the Arid Edge
-> ### Optimizing Live Fuel Moisture Thresholds for Southern California Wildfire Readiness
+### Optimizing Live Fuel Moisture Thresholds for Southern California Wildfire Readiness
 
 **Executive Summary:** This repository contains a data engineering and predictive modeling pipeline designed to identify the "Arid Edge"—the critical Live Fuel Moisture (LFM) threshold at which Southern California landscapes transition from fire-resistant to explosively flammable. By integrating 10,000+ field-collected vegetation samples from the National Fuel Moisture Database with historical CAL FIRE perimeter data, the project transforms raw environmental observations into a normalized relational database using Python and DuckDB. The included analysis optimizes a "Red Line" moisture metric to provide emergency agencies with a stable, biological signal for resource staging, moving beyond the volatility of wind-based alerts to mitigate "alert fatigue" and enhance proactive wildfire suppression in the Wildland-Urban Interface.
 
