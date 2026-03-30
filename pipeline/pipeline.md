@@ -337,10 +337,8 @@ plt.tight_layout()
 plt.show()
 ```
 
-
     
-![png](pipeline_files/pipeline_12_0.png)
-    
+<img width="1489" height="790" alt="Unknown" src="https://github.com/user-attachments/assets/d5f52341-a751-42c4-ab8d-ba633fb8d9a4" />
 
 
 
