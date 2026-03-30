@@ -9,14 +9,13 @@
 
 **DOI:** [![DOI](https://zenodo.org/badge/1188880173.svg)](https://doi.org/10.5281/zenodo.19324715)
 
-**Press Release:** [Link to Markdown File](https://github.com/dqb5ee/project-1-dqb5ee/blob/main/PressRelease.md)
+**Press Release:** [View the "Arid Edge" Announcement](https://github.com/dqb5ee/project-1-dqb5ee/blob/main/PressRelease.md)
 
-**Data:** [Link to OneDrive Folder](https://myuva-my.sharepoint.com/:f:/g/personal/dqb5ee_virginia_edu/IgBl82ldBtixSpBs556Z1Z_gARDRne96Iha1X__LFe-_Zz4?e=RagYNQ)
+**Data:** [OneDrive Folder: Southern California Wildfire & Moisture Data](https://myuva-my.sharepoint.com/:f:/g/personal/dqb5ee_virginia_edu/IgBl82ldBtixSpBs556Z1Z_gARDRne96Iha1X__LFe-_Zz4?e=RagYNQ)
 
-**Pipeline:** [Link to Markdown File](https://github.com/dqb5ee/project-1-dqb5ee/blob/main/Pipeline.md)
+**Pipeline:** [Technical Pipeline & Execution Log](https://github.com/dqb5ee/project-1-dqb5ee/blob/main/Pipeline.md)
 
-**License:** This project is licensed under the MIT License. [Link to License File](https://github.com/dqb5ee/project-1-dqb5ee/blob/main/License.md)
-
+**License:** This project is licensed under the [MIT License.](https://github.com/dqb5ee/project-1-dqb5ee/blob/main/License.md)
 
 ## Problem Definition
 
